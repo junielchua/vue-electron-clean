@@ -4,13 +4,7 @@ module.exports = defineConfig({
   pluginOptions: {
     electronBuilder: {
       builderOptions: {
-        publish: [
-          {
-            "provider": "github",
-            "owner": "junielchua",
-            "repo": "vue-electron-clean",
-            "private": false
-          }]
+        publish: ['github']
       }
     }
   }
