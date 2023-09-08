@@ -45,7 +45,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      uid: {
+      unid: {
         allowNull: true,
         type: Sequelize.INTEGER
       }

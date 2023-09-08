@@ -53,6 +53,16 @@ ipcMain.on('loadVersion', (event) => {
   winCon.send('sendVersion', app.getVersion())
 })
 
+ipcMain.handle('getVersion', async () => {
+  // do stuff
+  return app.getVersion();
+});
+
+ipcMain.handle('getDbVer', async () => {
+  // do stuff
+  return 'v' + process.env.DB_VERSION;
+});
+
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
   // On macOS it is common for applications and their menu bar

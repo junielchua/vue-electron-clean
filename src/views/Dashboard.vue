@@ -95,7 +95,7 @@
         <div
           class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2">Dashboard</h1>
-          <div class="btn-toolbar mb-2 mb-md-0">
+          <!-- <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group me-2">
               <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
               <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
@@ -104,135 +104,32 @@
               <span data-feather="calendar"></span>
               This week
             </button>
-          </div>
+          </div> -->
         </div>
 
         <h2>Section title</h2>
-        <div class="table-responsive">
-          <table class="table table-striped table-sm">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Header</th>
-                <th scope="col">Header</th>
-                <th scope="col">Header</th>
-                <th scope="col">Header</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1,001</td>
-                <td>random</td>
-                <td>data</td>
-                <td>placeholder</td>
-                <td>text</td>
-              </tr>
-              <tr>
-                <td>1,002</td>
-                <td>placeholder</td>
-                <td>irrelevant</td>
-                <td>visual</td>
-                <td>layout</td>
-              </tr>
-              <tr>
-                <td>1,003</td>
-                <td>data</td>
-                <td>rich</td>
-                <td>dashboard</td>
-                <td>tabular</td>
-              </tr>
-              <tr>
-                <td>1,003</td>
-                <td>information</td>
-                <td>placeholder</td>
-                <td>illustrative</td>
-                <td>data</td>
-              </tr>
-              <tr>
-                <td>1,004</td>
-                <td>text</td>
-                <td>random</td>
-                <td>layout</td>
-                <td>dashboard</td>
-              </tr>
-              <tr>
-                <td>1,005</td>
-                <td>dashboard</td>
-                <td>irrelevant</td>
-                <td>text</td>
-                <td>placeholder</td>
-              </tr>
-              <tr>
-                <td>1,006</td>
-                <td>dashboard</td>
-                <td>illustrative</td>
-                <td>rich</td>
-                <td>data</td>
-              </tr>
-              <tr>
-                <td>1,007</td>
-                <td>placeholder</td>
-                <td>tabular</td>
-                <td>information</td>
-                <td>irrelevant</td>
-              </tr>
-              <tr>
-                <td>1,008</td>
-                <td>random</td>
-                <td>data</td>
-                <td>placeholder</td>
-                <td>text</td>
-              </tr>
-              <tr>
-                <td>1,009</td>
-                <td>placeholder</td>
-                <td>irrelevant</td>
-                <td>visual</td>
-                <td>layout</td>
-              </tr>
-              <tr>
-                <td>1,010</td>
-                <td>data</td>
-                <td>rich</td>
-                <td>dashboard</td>
-                <td>tabular</td>
-              </tr>
-              <tr>
-                <td>1,011</td>
-                <td>information</td>
-                <td>placeholder</td>
-                <td>illustrative</td>
-                <td>data</td>
-              </tr>
-              <tr>
-                <td>1,012</td>
-                <td>text</td>
-                <td>placeholder</td>
-                <td>layout</td>
-                <td>dashboard</td>
-              </tr>
-              <tr>
-                <td>1,013</td>
-                <td>dashboard</td>
-                <td>irrelevant</td>
-                <td>text</td>
-                <td>visual</td>
-              </tr>
-              <tr>
-                <td>1,014</td>
-                <td>dashboard</td>
-                <td>illustrative</td>
-                <td>rich</td>
-                <td>data</td>
-              </tr>
-              <tr>
-                <td>1,015</td>
-                <td>random</td>
-                <td>tabular</td>
-                <td>information</td>
-                <td>text</td>
-              </tr>
-            </tbody>
+        <div class="text-left">
+          <table>
+            <tr>
+              <td class="p-1">Check App Version :</td>
+              <td class="p-1"><button class="btn btn-primary btn-sm" type="button" @click="btnChkAppVer">Check</button></td>
+              <td class="p-1">{{ resChkAppVer }}</td>
+            </tr>
+            <tr>
+              <td class="p-1">Check Database Version :</td>
+              <td class="p-1"><button class="btn btn-primary btn-sm" type="button" @click="btnSyncDb">Check</button></td>
+              <td class="p-1">{{ resChkDatabaseVer }}</td>
+            </tr>
+            <tr>
+              <td class="p-1">Sync Database Version :</td>
+              <td class="p-1"><button class="btn btn-primary btn-sm" type="button" @click="btnSyncDbVer">Sync</button></td>
+              <td class="p-1">{{ resSyncDbVersion }}</td>
+            </tr>
+            <tr>
+              <td class="p-1">Sync To Cloud :</td>
+              <td class="p-1"><button class="btn btn-primary btn-sm" type="button" @click="btnSyncCloud">Sync</button></td>
+              <td class="p-1">{{ resSyncCloud }}</td>
+            </tr>
           </table>
         </div>
       </main>
@@ -244,6 +141,42 @@
 export default {
   name: 'sync-dashboard',
   components: {},
+  data(){
+    return {
+      resChkAppVer: "",
+      resChkDatabaseVer: "",
+      resSyncDbVersion: "",
+      resSyncCloud: "",
+    }
+  },
+  methods:{
+    async btnChkAppVer() {
+      this.resChkAppVer = "Loading...";
+
+      const response = await window.api.getVersion();
+      this.resChkAppVer = response;
+      console.log(response);
+    },
+    async btnSyncDb() {
+      this.resChkDatabaseVer = "Loading...";
+
+      const response = await window.api.getDbVer();
+      this.resChkDatabaseVer = response;
+      console.log(response);
+    },
+    async btnSyncDbVer() {
+      this.resSyncDbVersion = "Loading...";
+
+      const response = await window.api.syncDb();
+      this.resSyncDbVersion = response.message;
+      console.log(response);
+    },
+    async btnSyncCloud() {
+      const response = await window.api.syncData();
+      this.resSyncCloud = response;
+      console.log(response);
+    }
+  }
 };
 </script>
 

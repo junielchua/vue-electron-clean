@@ -85,6 +85,10 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
+      unid: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      }
     },
     {
       sequelize,

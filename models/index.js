@@ -14,6 +14,8 @@ const config = {
 let sequelize;
 sequelize = new Sequelize(config.database, config.username, config.password, config);
 
+const configuration = require('./configuration')(sequelize, Sequelize.DataTypes);
+db[configuration.name] = configuration;
 const product = require('./product')(sequelize, Sequelize.DataTypes);
 db[product.name] = product;
 const sale_item = require('./sale_item')(sequelize, Sequelize.DataTypes);
